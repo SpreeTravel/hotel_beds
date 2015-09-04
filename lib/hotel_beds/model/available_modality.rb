@@ -1,3 +1,4 @@
+require "hotel_beds/model"
 require "hotel_beds/model/price"
 require "hotel_beds/model/contract"
 
@@ -5,37 +6,25 @@ require "hotel_beds/model/contract"
 module HotelBeds
   module Model
     class AvailableModality
-      # attributes
-      attribute :id, Integer
-      attribute :room_count, Integer
-      attribute :description, String
-      attribute :board, String
-      attribute :board_code, String
-      attribute :room_type_code, String
-      attribute :room_type_characteristic, String
-      attribute :price, BigDecimal
-      attribute :number_available, Integer
-      attribute :rates, Hash[Date => BigDecimal]
-      attribute :cancellation_policies, Array[HotelBeds::Model::CancellationPolicy],
-        default: Array.new
-      attribute :customers, Array[HotelBeds::Model::Customer],
-        default: Array.new
+      include HotelBeds::Model
 
-      def rates=(values)
-        if values.kind_of?(Array)
-          prices = values.map do |attrs|
-            HotelBeds::Model::Price.new(attrs)
-          end
-          hash = prices.each_with_object(Hash.new) do |price, result|
-            price.dates.each do |date|
-              result[date] = price.amount
-            end
-          end
-          super(hash)
-        else
-          super
-        end
-      end
+      # attributes
+      attribute :code, String
+      attribute :name, String
+      attribute :type, String
+      attribute :mode, String
+      attribute :adult_count, Integer
+      attribute :child_ages, Array[Integer], default: Array.new
+      attribute :content_sequence, Integer
+      attribute :prices, Array[HotelBeds::Model::Price],
+                default: Array.new
+      attribute :contract, HotelBeds::Model::Contract
+
+      validates :child_ages, numericality: {
+                                greater_than_or_equal_to: 4,
+                                less_than_or_equal_to: 12,
+                                only_integer: true,
+                            }
     end
   end
 end
