@@ -9,22 +9,16 @@ module HotelBeds
 
       # attributes
       attribute :id, selector: "HotelRoom", attr: "SHRUI"
-      attribute :room_count, selector: "HotelOccupancy RoomCount"
-      attribute :adult_count, selector: "HotelOccupancy AdultCount"
-      attribute :child_count, selector: "HotelOccupancy ChildCount"
-      attribute :number_available, selector: "HotelRoom", attr: "availCount"
-      attribute :description, selector: "HotelRoom RoomType"
-      attribute :board, selector: "HotelRoom Board"
       attribute :code, attr: "code"
-      attribute :room_type_code, selector: "HotelRoom RoomType", attr: "code"
-      attribute :room_type_characteristic,
-        selector: "HotelRoom RoomType", attr: "characteristic"
-      attribute :price, selector: "HotelRoom > Price > Amount"
-      attribute :cancellation_policies,
-        selector: "HotelRoom CancellationPolicy", multiple: true,
-        parser: HotelBeds::Parser::CancellationPolicy
+      attribute :name, attr: "Name"
+      attribute :type, attr: "Type"
+      attribute :mode, attr: "Mode"
+      attribute :adult_count, selector: "HotelOccupancy AdultCount"
+      attribute :child_age, attr: "ChildAge"
+      attribute :content_sequence, attr: "ContentSequence"
+
       attribute :prices,
-        selector: "PriceList Price", multiple: true,
+        selector: "PriceList > Price", multiple: true,
         parser: HotelBeds::Parser::Price
       attribute :contract,
         selector: "Contract", multiple: true,
