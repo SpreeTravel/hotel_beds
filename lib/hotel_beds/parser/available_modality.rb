@@ -15,7 +15,7 @@ module HotelBeds
       attribute :number_available, selector: "HotelRoom", attr: "availCount"
       attribute :description, selector: "HotelRoom RoomType"
       attribute :board, selector: "HotelRoom Board"
-      attribute :board_code, selector: "HotelRoom Board", attr: "code"
+      attribute :code, attr: "code"
       attribute :room_type_code, selector: "HotelRoom RoomType", attr: "code"
       attribute :room_type_characteristic,
         selector: "HotelRoom RoomType", attr: "characteristic"
@@ -23,12 +23,12 @@ module HotelBeds
       attribute :cancellation_policies,
         selector: "HotelRoom CancellationPolicy", multiple: true,
         parser: HotelBeds::Parser::CancellationPolicy
-      attribute :rates,
-        selector: "Price PriceList Price", multiple: true,
+      attribute :prices,
+        selector: "PriceList Price", multiple: true,
         parser: HotelBeds::Parser::Price
-      attribute :customers,
-        selector: "HotelOccupancy GuestList Customer", multiple: true,
-        parser: HotelBeds::Parser::Customer
+      attribute :contract,
+        selector: "Contract", multiple: true,
+        parser: HotelBeds::Parser::Contract
     end
   end
 end
