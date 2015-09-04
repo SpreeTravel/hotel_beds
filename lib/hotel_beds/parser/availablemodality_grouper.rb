@@ -1,7 +1,7 @@
 # see INTERNALS.md for comment symbols
 module HotelBeds
   module Parser
-    class AvailableModalityGrouper
+    class ModalityGrouper
       attr_accessor :requested_rooms, :response_rooms
       private :requested_rooms=, :response_rooms=
 
