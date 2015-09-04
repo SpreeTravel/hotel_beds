@@ -13,7 +13,7 @@ module HotelBeds
       attribute :type, attr: "Type"
       attribute :mode, attr: "Mode"
       attribute :adult_count, selector: "HotelOccupancy AdultCount"
-      attribute :child_age, attr: "ChildAge"
+      attribute :child_ages, attr: "ChildAge"
       attribute :content_sequence, attr: "ContentSequence"
 
       attribute :prices,
