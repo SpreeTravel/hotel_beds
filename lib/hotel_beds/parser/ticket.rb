@@ -16,6 +16,8 @@ module HotelBeds
       attribute :images, selector: "TicketInfo > ImageList > Image > Url",
         multiple: true
       attribute :ticket_zone, attr: "TicketInfo > TicketZone"
+      attribute :company_code, attr: "TicketInfo > CompanyCode"
+      attribute :ticket_class, attr: "TicketInfo > TicketClass"
       attribute :destination, selector: "TicketInfo > Destination",
         parser: HotelBeds::Parser::Destination
       attribute :available_modality, selector: "AvailableModality", multiple: true,
