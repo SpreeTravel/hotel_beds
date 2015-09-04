@@ -19,7 +19,7 @@ module HotelBeds
       attribute :destination, selector: "TicketInfo > Destination",
         parser: HotelBeds::Parser::Destination
       attribute :available_modality, selector: "AvailableModality", multiple: true,
-        parser: HotelBeds::Parser::AvailableModality ## Agregar un parser para este
+        parser: HotelBeds::Parser::AvailableModality
     end
   end
 end
