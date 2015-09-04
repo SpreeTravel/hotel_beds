@@ -8,7 +8,6 @@ module HotelBeds
       include HotelBeds::Parser
 
       # attributes
-      attribute :id, selector: "HotelRoom", attr: "SHRUI"
       attribute :code, attr: "code"
       attribute :name, attr: "Name"
       attribute :type, attr: "Type"
