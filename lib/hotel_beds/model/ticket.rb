@@ -1,7 +1,7 @@
 require "hotel_beds/model"
 require "hotel_beds/model/available_modality"
 require "hotel_beds/model/destination"
-require "hotel_beds/parser/modality_grouper"
+require "hotel_beds/parser/availablemodality_grouper"
 
 module HotelBeds
   module Model
