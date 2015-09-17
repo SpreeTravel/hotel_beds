@@ -9,10 +9,12 @@ module HotelBeds
           :@sessionId => session_id,
           :PaginationData => pagination_data,
           :Language => language,
-          :CheckInDate => check_in_date,
-          :CheckOutDate => check_out_date,
-          :OccupancyList => occupancy_list
-        }.merge(Hash(destination)).merge(Hash(hotels)).merge(Hash(extra_params))
+          :DateFrom => date_in,
+          :DateOut => date_out,
+          :OccupancyList => occupancy_list,
+          :PickupLocation => pickup_location,
+          :DestinationLocation => destination_location,
+        }.merge(Hash(extra_params))
       end
 
       private
@@ -41,28 +43,31 @@ module HotelBeds
         String(__getobj__.language).upcase
       end
 
-      def check_in_date
+      def date_in
         { :@date => __getobj__.check_in_date.strftime("%Y%m%d") }
       end
 
-      def check_out_date
+      def date_out
         { :@date => __getobj__.check_out_date.strftime("%Y%m%d") }
       end
 
-      def destination
-        { Destination: {
-          :@code => String(__getobj__.destination_code).upcase,
-          :@type => "SIMPLE"
-        } }
+      def pickup_location
+        { PickupLocation: {
+            :@code => String(__getobj__.code).upcase,
+            :@datetime => DateTime(__getobj__.datetime)
+        }
+        }
+
       end
 
-      def hotels
-        if Array(__getobj__.hotel_codes).any?
-          { HotelCodeList: {
-            :@withinResults => "Y",
-            :ProductCode => Array(__getobj__.hotel_codes)
-          } }
-        end
+      def destination_location
+        {
+            DestinationLocation: {
+            :@code => String(__getobj__.code).upcase,
+            :@transfer_zone => String(__getobj__.transfer_zone.code).upcase
+
+            }
+        }
       end
 
       def occupancy_list
