@@ -2,7 +2,7 @@ require "hotel_beds/parser"
 
 module HotelBeds
   module Parser
-    class TransferBulletPoint
+    class PickupLocation
       include HotelBeds::Parser
 
       # attributes
