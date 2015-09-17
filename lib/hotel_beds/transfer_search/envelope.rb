@@ -53,8 +53,8 @@ module HotelBeds
 
       def pickup_location
         { PickupLocation: {
-            :@code => String(__getobj__.code).upcase,
-            :@datetime => DateTime(__getobj__.datetime)
+            :@code => String(__getobj__.pickup_location.first.code).upcase,
+            # :@datetime => __getobj__.pickup_location.first.datetime.strftime("%Y%m%d")
         }
         }
 
@@ -63,8 +63,8 @@ module HotelBeds
       def destination_location
         {
             DestinationLocation: {
-            :@code => String(__getobj__.code).upcase,
-            :@transfer_zone => String(__getobj__.transfer_zone.code).upcase
+            :@code => String(__getobj__.destination_location.first.code).upcase,
+            # :@transfer_zone => String(__getobj__.transfer_zone.code).upcase
 
             }
         }
