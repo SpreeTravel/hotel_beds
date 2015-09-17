@@ -14,6 +14,7 @@ module HotelBeds
       attribute :availability_token, attr: "availToken"
       attribute :transfer_type, attr: "transferType"
       attribute :date_from, attr: "DateFrom"
+      attribute :currency, attr: "Currency"
       attribute :total_amount, attr: "TotalAmount"
       attribute :net_price, attr: "NetPrice"
       attribute :descriptions, selector: "TransferInfo > DescriptionList > Description",
@@ -22,7 +23,6 @@ module HotelBeds
         multiple: true
       attribute :type, attr: "TransferInfo > Type"
       attribute :vehicle_type, attr: "TransferInfo > VehicleType"
-      attribute :company_code, attr: "TicketInfo > CompanyCode"
       attribute :maximum_waiting_time, attr: "TransferInfo > TransferSpecificContent > MaximumWaitingTime"
       attribute :contract, selector: "ContractList > Contract",
                 parser: HotelBeds::Parser::Contract
