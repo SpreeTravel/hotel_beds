@@ -44,11 +44,11 @@ module HotelBeds
       end
 
       def date_in
-        { :@date => __getobj__.check_in_date.strftime("%Y%m%d") }
+        { :@date => __getobj__.date_in.strftime("%Y%m%d") }
       end
 
       def date_out
-        { :@date => __getobj__.check_out_date.strftime("%Y%m%d") }
+        { :@date => __getobj__.date_out.strftime("%Y%m%d") }
       end
 
       def pickup_location
