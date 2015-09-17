@@ -34,6 +34,12 @@ module HotelBeds
       )
     end
 
+    def perform_transfer_search(*args)
+      Transfer::Operation.new(*args).perform(
+          connection: connection
+      )
+    end
+
     def add_hotel_room_to_basket(*args)
       HotelBasketAdd::Operation.new(*args).perform(
         connection: connection
