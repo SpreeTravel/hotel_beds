@@ -1,7 +1,6 @@
 require "hotel_beds/parser"
 require "hotel_beds/parser/contract"
 require "hotel_beds/parser/destination"
-require "hotel_beds/parser/available_modality"
 require "hotel_beds/parser/transferbullet_point"
 
 module HotelBeds
@@ -28,10 +27,7 @@ module HotelBeds
                 parser: HotelBeds::Parser::Contract
       attribute :transferbullet_point, selector: "TransferInfo > TransferSpecificContent > GenericTransferGuidelinesList > TransferBulletPoint",
                 parser: HotelBeds::Parser::TransferBulletPoint
-      attribute :destination, selector: "TicketInfo > Destination",
-        parser: HotelBeds::Parser::Destination
-      attribute :available_modality, selector: "AvailableModality", multiple: true,
-        parser: HotelBeds::Parser::AvailableModality
+
     end
   end
 end
