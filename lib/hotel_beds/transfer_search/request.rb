@@ -16,7 +16,7 @@ module HotelBeds
      attribute :rooms, Array[HotelBeds::Model::RequestedRoom]
 
       # validation
-      validates :destination_code, length: { is: 3, allow_blank: false }
+      #validates :destination_code, length: { is: 3, allow_blank: false }
       validates :session_id, :check_in_date, :check_out_date, presence: true
       validates :rooms, length: { minimum: 1, maximum: 5 }
       validates :page_number, numericality: {
