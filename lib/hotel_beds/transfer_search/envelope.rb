@@ -78,7 +78,6 @@ module HotelBeds
           }
 
         }
-
       end
     end
   end
