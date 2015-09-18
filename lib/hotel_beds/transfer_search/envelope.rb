@@ -11,7 +11,7 @@ module HotelBeds
           :Language => language,
           :DateFrom => date_in,
           :DateOut => date_out,
-          :OccupancyList => occupancy_list,
+          :Occupancy => occupancy,
           :PickupLocation => pickup_location,
           :DestinationLocation => destination_location,
         }.merge(Hash(extra_params))
@@ -70,14 +70,17 @@ module HotelBeds
         }
       end
 
-      def occupancy_list
-        grouped_rooms = Array(rooms).group_by(&:group_key).values
-        { HotelOccupancy: grouped_rooms.map(&method(:build_room)) }
+      def occupancy
+        {
+          Occupancy:{
+            :@adult_count => Integer(__getobj__.adult_count),
+            :@child_count => Integer(__getobj__.child_count)
+          }
+
+        }
+
       end
 
-      def build_room(rooms)
-        HotelBeds::Builder::HotelOccupancy.new(rooms).to_h
-      end
     end
   end
 end
