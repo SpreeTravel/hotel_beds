@@ -2,6 +2,7 @@ require "securerandom"
 require "hotel_beds/action/request"
 require "hotel_beds/model/requested_room"
 require "hotel_beds/model/destination_location"
+require "hotel_beds/model/occupancy"
 require "hotel_beds/model/pickup_location"
 
 module HotelBeds
@@ -14,6 +15,7 @@ module HotelBeds
       attribute :date_in, Date
       attribute :date_out, Date
       attribute :destination_location, Array[HotelBeds::Model::DestinationLocation]
+      attribute :occupancy, Array[HotelBeds::Model::Occupancy]
       attribute :pickup_location, Array[HotelBeds::Model::PickupLocation]
       ##attribute :rooms, Array[HotelBeds::Model::RequestedRoom]
 
