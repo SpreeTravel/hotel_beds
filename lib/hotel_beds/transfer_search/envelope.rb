@@ -73,8 +73,8 @@ module HotelBeds
       def occupancy
         {
           Occupancy:{
-            :@adult_count => Integer(__getobj__.adult_count),
-            :@child_count => Integer(__getobj__.child_count)
+            :@adult_count => Integer(__getobj__.occupancy.adult_count),
+            :@child_count => Integer(__getobj__.occupancy.child_count)
           }
 
         }
