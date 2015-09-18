@@ -6,8 +6,13 @@ module HotelBeds
       include HotelBeds::Model
 
       # attributes
-      attribute :adult_count, Integer
-      attribute :child_count, Integer
+      attribute :adult_count, Integer, default: 0
+      attribute :child_count, Integer, default: 0
+      validates :adult_count, :child_count, numericality: {
+        greater_than_or_equal_to: 0,
+        less_than_or_equal_to: 4,
+        only_integer: true,
+      }
     end
   end
 end
