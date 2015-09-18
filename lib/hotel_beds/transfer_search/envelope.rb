@@ -80,7 +80,6 @@ module HotelBeds
         }
 
       end
-
     end
   end
 end
