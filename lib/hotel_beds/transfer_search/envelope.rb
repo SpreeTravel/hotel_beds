@@ -7,13 +7,12 @@ module HotelBeds
       def attributes
         {
           :@sessionId => session_id,
-          :PaginationData => pagination_data,
+          :ServiceDate => service_date,
           :Language => language,
-          :DateFrom => date_in,
-          :DateOut => date_out,
           :Occupancy => occupancy,
           :PickupLocation => pickup_location,
           :DestinationLocation => destination_location,
+          :ReturnContents => return_contents
         }.merge(Hash(extra_params))
       end
 
@@ -32,10 +31,13 @@ module HotelBeds
         } }
       end
 
-      def pagination_data
+      def service_date
         {
-          :@pageNumber => Integer(page_number),
-          :@itemsPerPage => Integer(items_per_page)
+            ServiceDate:{
+                :@date => Date(__getobj__.service_date.first.date),
+                :@time => Time(__getobj__.service_date.first.time)
+            }
+
         }
       end
 
@@ -43,30 +45,31 @@ module HotelBeds
         String(__getobj__.language).upcase
       end
 
-      def date_in
-        { :@date => __getobj__.date_in.strftime("%Y%m%d") }
-      end
-
-      def date_out
-        { :@date => __getobj__.date_out.strftime("%Y%m%d") }
-      end
-
       def pickup_location
         { PickupLocation: {
             :@code => String(__getobj__.pickup_location.first.code).upcase,
-            # :@datetime => __getobj__.pickup_location.first.datetime.strftime("%Y%m%d")
+            :@datetime => __getobj__.pickup_location.first.datetime.strftime("%Y%m%d"),
+            :@transfer_zone_code => transfer_zone
         }
         }
 
       end
 
       def destination_location
-        {
-            DestinationLocation: {
+        { DestinationLocation:{
             :@code => String(__getobj__.destination_location.first.code).upcase,
-            # :@transfer_zone => String(__getobj__.transfer_zone.code).upcase
+            :@datetime => __getobj__.destination_location.first.datetime.strftime("%Y%m%d"),
+            :@transfer_zone_code => transfer_zone
+        }
+        }
+      end
 
-            }
+      def transfer_zone
+        {
+            TransferZone:
+                {
+                    :@code => Integer(__getobj__.transfer_zone.first.code)
+                }
         }
       end
 
@@ -78,6 +81,10 @@ module HotelBeds
           }
 
         }
+      end
+
+      def return_contents
+        String(__getobj__.return_contents).upcase
       end
     end
   end
