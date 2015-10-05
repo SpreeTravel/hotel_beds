@@ -22,6 +22,7 @@ module HotelBeds
         parser: HotelBeds::Parser::Destination
       attribute :available_rooms, selector: "AvailableRoom", multiple: true,
         parser: HotelBeds::Parser::AvailableRoom
+      attribute :stars, selector: "HotelInfo > Category", attr: "shortname"
     end
   end
 end
