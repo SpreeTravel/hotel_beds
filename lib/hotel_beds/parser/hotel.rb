@@ -23,6 +23,7 @@ module HotelBeds
       attribute :available_rooms, selector: "AvailableRoom", multiple: true,
         parser: HotelBeds::Parser::AvailableRoom
       attribute :stars, selector: "HotelInfo > Category", attr: "shortname"
+      attribute :currency, selector: "Currency", attr: "code"
     end
   end
 end

@@ -20,6 +20,7 @@ module HotelBeds
       attribute :contract, HotelBeds::Model::Contract
       attribute :destination, HotelBeds::Model::Destination
       attribute :stars, String
+      attribute :currency, String
 
       def grouped_rooms(requested_rooms)
         HotelBeds::Parser::RoomGrouper.new(requested_rooms, available_rooms).groups
