@@ -27,9 +27,10 @@ module HotelBeds
       def currency
         body.at_css("Currency").attr("code")
       end
+
       ## Agregar lo referente a tickets
-      def hotels
-        body.css("ServiceHotel").lazy.map do |hotel|
+      def tickets
+        body.css("ServiceTicket").lazy.map do |hotel|
           HotelBeds::Parser::Hotel.new(hotel).to_model
         end
       end

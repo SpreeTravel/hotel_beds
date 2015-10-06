@@ -18,7 +18,7 @@ module HotelBeds
           # :Contract => HotelBeds::Model::Contract, ## Agregar validate del 1 a 10
           # :TicketCode => ticket_code,
           # :ModalityCode => modality_code, ## Agregar validate del 1 al 13
-          :OccupancyList => occupancy_list
+          :ServiceOccupancy => occupancy
         }.merge(Hash(destination))
       end
 
@@ -58,28 +58,18 @@ module HotelBeds
 
       def destination
         { Destination: {
-          :@code => String(__getobj__.destination_code).upcase,
+          :@code => String(__getobj__.destination).upcase,
           :@type => "SIMPLE"
         } }
       end
 
       def occupancy
         {
-            Occupancy:{
-                :@adult_count => Integer(__getobj__.occupancy.first.adult_count),
-                :@child_count => Integer(__getobj__.occupancy.first.child_count)
-            }
+          :@adult_count => Integer(__getobj__.service_occupancy.first.adult_count),
+          :@child_count => Integer(__getobj__.service_occupancy.first.child_count)
         }
       end
 
-      # def hotels
-      #   if Array(__getobj__.hotel_codes).any?
-      #     { HotelCodeList: {
-      #       :@withinResults => "Y",
-      #       :ProductCode => Array(__getobj__.hotel_codes)
-      #     } }
-      #   end
-      # end
     end
   end
 end

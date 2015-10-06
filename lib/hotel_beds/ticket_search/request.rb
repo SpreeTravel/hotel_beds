@@ -11,9 +11,10 @@ module HotelBeds
       # attributes
       attribute :session_id, String, default: SecureRandom.hex[0..15]
       attribute :items_per_page, Integer, default: 50
+      attribute :page_number, Integer, default: 1
       attribute :date_from, Date
       attribute :date_to, Date
-      attribute :destination_code, String
+      attribute :destination, String
       attribute :service_occupancy, Array[HotelBeds::Model::Occupancy]
 
 

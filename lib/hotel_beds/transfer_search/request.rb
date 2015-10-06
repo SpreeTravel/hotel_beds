@@ -11,8 +11,9 @@ module HotelBeds
     class Request < HotelBeds::Action::Request
       # attributes
       attribute :session_id, String, default: SecureRandom.hex[0..15]
-      attribute :page_number, Integer, default: 1
-      attribute :items_per_page, Integer, default: 50
+      # seams that there is no pagination for transfer
+      # attribute :page_number, Integer, default: 1
+      # attribute :items_per_page, Integer, default: 50
       attribute :service_date, Array[HotelBeds::Model::ServiceDate]
       attribute :destination_location, Array[HotelBeds::Model::DestinationLocation]
       attribute :occupancy, Array[HotelBeds::Model::Occupancy]

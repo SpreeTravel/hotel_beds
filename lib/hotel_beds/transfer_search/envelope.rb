@@ -7,12 +7,13 @@ module HotelBeds
       def attributes
         {
           :@sessionId => session_id,
-          :ServiceDate => service_date,
           :Language => language,
-          :Occupancy => occupancy,
-          :PickupLocation => pickup_location,
-          :DestinationLocation => destination_location,
-          :ReturnContents => return_contents
+          :ReturnContents => return_contents,
+          AvailData: {
+                :@type => 'IN',
+                :ServiceDate => service_date,
+                :Occupancy => occupancy,
+                }.merge(Hash(pickup_location)).merge(Hash(destination_location))
         }.merge(Hash(extra_params))
       end
 
@@ -33,11 +34,8 @@ module HotelBeds
 
       def service_date
         {
-            ServiceDate:{
-                :@date => __getobj__.service_date.first.date.strftime("%Y%m%d"),
-                :@time => Time.now
-            }
-
+          :@date =>  __getobj__.service_date.first.date.strftime("%Y%m%d") ,
+          :@time =>  __getobj__.service_date.first.time
         }
       end
 
@@ -46,31 +44,36 @@ module HotelBeds
       end
 
       def pickup_location
-        { PickupLocation: {
+        { PickupLocation:  {
+            '@xsi:type'=>"ProductTransferHotel",
             :@code => String(__getobj__.pickup_location.first.code).upcase,
-            :@datetime => __getobj__.pickup_location.first.datetime.strftime("%Y%m%d"),
-            # :@transfer_zone_code => transfer_zone
-        }
+            TransferZone: {
+              # '@xsi:type'=>"ProductZone",
+            #   :@code => 'CPASTILLA',
+            #   :@name => 'Can Pastilla'
+            }
+          }
         }
 
       end
 
       def destination_location
-        { DestinationLocation:{
+        { DestinationLocation: {
+            '@xsi:type'=>"ProductTransferTerminal",
             :@code => String(__getobj__.destination_location.first.code).upcase,
-            # :@datetime => __getobj__.destination_location.first.datetime.strftime("%Y%m%d"),
-            # :@transfer_zone_code => transfer_zone
-        }
+          TransferZone: {
+            # '@xsi:type'=>"ProductZone",
+          #   :@code => 'Aeropuerto',
+          #   :@name => 'Palma Majorca, Son Sant Joan Airport'
+            }
+          }
         }
       end
 
       def occupancy
         {
-            Occupancy:{
-                :@adult_count => Integer(__getobj__.occupancy.first.adult_count),
-                :@child_count => Integer(__getobj__.occupancy.first.child_count)
-            }
-
+          :@adult_count => Integer(__getobj__.occupancy.first.adult_count),
+          :@child_count => Integer(__getobj__.occupancy.first.child_count)
         }
       end
 
