@@ -2,7 +2,7 @@ require "hotel_beds/action/response"
 require "hotel_beds/parser/ticket"
 
 module HotelBeds
-  module Ticket
+  module TicketSearch
     class Response < HotelBeds::Action::Response
       def session_id
         request.session_id

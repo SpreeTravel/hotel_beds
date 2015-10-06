@@ -2,7 +2,7 @@ require "hotel_beds/configuration"
 require "hotel_beds/connection"
 require "hotel_beds/hotel_search/operation"
 require "hotel_beds/transfer_search/operation"
-require "hotel_beds/ticket/operation"
+require "hotel_beds/ticket_search/operation"
 require "hotel_beds/hotel_basket_add/operation"
 require "hotel_beds/purchase_confirm/operation"
 require "hotel_beds/purchase_cancel/operation"
@@ -30,7 +30,7 @@ module HotelBeds
     end
 
     def perform_ticket_search(*args)
-      Ticket::Operation.new(*args).perform(
+      TicketSearch::Operation.new(*args).perform(
         connection: connection
       )
     end

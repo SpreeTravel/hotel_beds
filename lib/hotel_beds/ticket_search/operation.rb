@@ -4,7 +4,7 @@ require_relative "request"
 require_relative "response"
 
 module HotelBeds
-  module Ticket
+  module TicketSearch
     class Operation < HotelBeds::Action::Operation
       remote_method :getTicketAvail
       remote_namespace :TicketAvailRQ

@@ -4,23 +4,22 @@ require "hotel_beds/model/destination"
 require "hotel_beds/model/contract"
 
 module HotelBeds
-  module Ticket
+  module TicketSearch
     class Envelope < HotelBeds::Action::Envelope
       def attributes
         {
           :@sessionId => session_id,
           :PaginationData => pagination_data,
-          :ServiceOccupancy => service_occupancy,
           :Language => language,
           :DateFrom => date_from,
           :DateTo => date_to,
-          :Classification => classification,
-          :TicketZone => ticket_zone,
-          :Contract => HotelBeds::Model::Contract, ## Agregar validate del 1 a 10
-          :TicketCode => ticket_code,
-          :ModalityCode => modality_code, ## Agregar validate del 1 al 13
+          # :Classification => classification,
+          # :TicketZone => ticket_zone,
+          # :Contract => HotelBeds::Model::Contract, ## Agregar validate del 1 a 10
+          # :TicketCode => ticket_code,
+          # :ModalityCode => modality_code, ## Agregar validate del 1 al 13
           :OccupancyList => occupancy_list
-        }.merge(Hash(destination)).merge(Hash(hotels)).merge(Hash(extra_params))
+        }.merge(Hash(destination))
       end
 
       private
@@ -64,14 +63,23 @@ module HotelBeds
         } }
       end
 
-      def hotels
-        if Array(__getobj__.hotel_codes).any?
-          { HotelCodeList: {
-            :@withinResults => "Y",
-            :ProductCode => Array(__getobj__.hotel_codes)
-          } }
-        end
+      def occupancy
+        {
+            Occupancy:{
+                :@adult_count => Integer(__getobj__.occupancy.first.adult_count),
+                :@child_count => Integer(__getobj__.occupancy.first.child_count)
+            }
+        }
       end
+
+      # def hotels
+      #   if Array(__getobj__.hotel_codes).any?
+      #     { HotelCodeList: {
+      #       :@withinResults => "Y",
+      #       :ProductCode => Array(__getobj__.hotel_codes)
+      #     } }
+      #   end
+      # end
     end
   end
 end
