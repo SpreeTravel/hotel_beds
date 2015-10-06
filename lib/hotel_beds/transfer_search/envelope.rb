@@ -20,22 +20,22 @@ module HotelBeds
       def extra_params
         { ExtraParamList: {
           ExtendedData: [{
-            :@type => "EXT_ADDITIONAL_PARAM",
-            :Name => "PARAM_KEY_PRICE_BREAKDOWN",
-            :Value => "Y"
-          }, {
-            :@type => "EXT_ORDER",
-            :Name => "ORDER_CONTRACT_PRICE",
-            :Value => "ASC"
-          }]
-        } }
-      end
+           :@type => "EXT_ADDITIONAL_PARAM",
+           :Name => "PARAM_KEY_PRICE_BREAKDOWN",
+           :Value => "Y"
+        }, {
+           :@type => "EXT_ORDER",
+           :Name => "ORDER_CONTRACT_PRICE",
+           :Value => "ASC"
+        }]
+      } }
+    end
 
       def service_date
         {
             ServiceDate:{
-                :@date => Date(__getobj__.service_date.first.date),
-                :@time => Time(__getobj__.service_date.first.time)
+                :@date => __getobj__.service_date.first.date.strftime("%Y%m%d"),
+                :@time => Time.now
             }
 
         }
@@ -49,7 +49,7 @@ module HotelBeds
         { PickupLocation: {
             :@code => String(__getobj__.pickup_location.first.code).upcase,
             :@datetime => __getobj__.pickup_location.first.datetime.strftime("%Y%m%d"),
-            :@transfer_zone_code => transfer_zone
+            # :@transfer_zone_code => transfer_zone
         }
         }
 
@@ -58,27 +58,18 @@ module HotelBeds
       def destination_location
         { DestinationLocation:{
             :@code => String(__getobj__.destination_location.first.code).upcase,
-            :@datetime => __getobj__.destination_location.first.datetime.strftime("%Y%m%d"),
-            :@transfer_zone_code => transfer_zone
+            # :@datetime => __getobj__.destination_location.first.datetime.strftime("%Y%m%d"),
+            # :@transfer_zone_code => transfer_zone
         }
-        }
-      end
-
-      def transfer_zone
-        {
-            TransferZone:
-                {
-                    :@code => Integer(__getobj__.transfer_zone.first.code)
-                }
         }
       end
 
       def occupancy
         {
-          Occupancy:{
-            :@adult_count => Integer(__getobj__.occupancy.first.adult_count),
-            :@child_count => Integer(__getobj__.occupancy.first.child_count)
-          }
+            Occupancy:{
+                :@adult_count => Integer(__getobj__.occupancy.first.adult_count),
+                :@child_count => Integer(__getobj__.occupancy.first.child_count)
+            }
 
         }
       end

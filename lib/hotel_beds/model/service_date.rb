@@ -2,12 +2,12 @@ require "hotel_beds/model"
 
 module HotelBeds
   module Model
-    class DestinationLocation
+    class ServiceDate
       include HotelBeds::Model
 
       # attributes
-      attribute :code, String
-      # attribute :transfer_zone, String
+      attribute :date, Date
+      attribute :time, Time
     end
   end
 end
