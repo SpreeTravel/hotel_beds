@@ -46,11 +46,11 @@ module HotelBeds
       def pickup_location
         { PickupLocation:  {
             '@xsi:type'=>"ProductTransferHotel",
-            :@code => String(__getobj__.pickup_location.first.code).upcase,
+            :@code => String(__getobj__.pickup_location).upcase,
             TransferZone: {
-              # '@xsi:type'=>"ProductZone",
-            #   :@code => 'CPASTILLA',
-            #   :@name => 'Can Pastilla'
+              '@xsi:type'=>"ProductZone",
+              :@code => 'MAN',
+              :@name => 'Can Pastilla'
             }
           }
         }
@@ -60,11 +60,11 @@ module HotelBeds
       def destination_location
         { DestinationLocation: {
             '@xsi:type'=>"ProductTransferTerminal",
-            :@code => String(__getobj__.destination_location.first.code).upcase,
+            :@code => String(__getobj__.destination_location).upcase,
           TransferZone: {
-            # '@xsi:type'=>"ProductZone",
-          #   :@code => 'Aeropuerto',
-          #   :@name => 'Palma Majorca, Son Sant Joan Airport'
+            '@xsi:type'=>"ProductZone",
+            :@code => 'JFK',
+            :@name => 'Palma Majorca, Son Sant Joan Airport'
             }
           }
         }

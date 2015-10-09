@@ -18,6 +18,7 @@ module HotelBeds
       attribute :board, selector: "HotelRoom Board"
       attribute :board_code, selector: "HotelRoom Board", attr: "code"
       attribute :room_type_code, selector: "HotelRoom RoomType", attr: "code"
+      attribute :room_type, selector: "HotelRoom RoomType"
       attribute :room_type_characteristic,
         selector: "HotelRoom RoomType", attr: "characteristic"
       attribute :price, selector: "HotelRoom > Price > Amount"

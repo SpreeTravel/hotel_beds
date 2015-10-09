@@ -16,7 +16,7 @@ module HotelBeds
       attribute :company_code, String
       attribute :room_code, String
       attribute :feature_code, String
-      attribute :features, Array[HotelBeds::Model::Feature]
+      # attribute :features, Array[HotelBeds::Model::Feature]
 
     end
   end

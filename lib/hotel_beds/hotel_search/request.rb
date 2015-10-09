@@ -34,6 +34,9 @@ module HotelBeds
           end
         end
       end
+
+      # TODO validate date range in 31 days
+
     end
   end
 end
