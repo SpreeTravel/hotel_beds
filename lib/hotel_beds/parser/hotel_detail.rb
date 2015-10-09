@@ -12,8 +12,12 @@ module HotelBeds
       attribute :code, selector: "Hotel > Code"
       attribute :name, selector: "Hotel > Name"
       attribute :description, selector: "Hotel > DescriptionList >  Description"
-      attribute :images, selector: "Hotel > ImageList > Image" ,  multiple: true,
-                parser: HotelBeds::Parser::Image
+      # attribute :images, selector: "Hotel > ImageList > Image" ,  multiple: true,
+      #           parser: HotelBeds::Parser::Image
+      attribute :images, selector: "Hotel > ImageList > Image > Url",
+                multiple: true
+      attribute :features, selector: "Hotel > FacilityList > Feature > Description",
+                multiple: true
       attribute :stars, selector: "Hotel > Category", attr: "shortname"
       attribute :destination, selector: "Hotel > Destination",
                 parser: HotelBeds::Parser::Destination

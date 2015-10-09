@@ -1,6 +1,7 @@
 require "hotel_beds/configuration"
 require "hotel_beds/connection"
 require "hotel_beds/hotel_search/operation"
+require "hotel_beds/hotel_detail/operation"
 require "hotel_beds/transfer_search/operation"
 require "hotel_beds/ticket_search/operation"
 require "hotel_beds/hotel_basket_add/operation"
@@ -25,6 +26,12 @@ module HotelBeds
 
     def perform_hotel_search(*args)
       HotelSearch::Operation.new(*args).perform(
+        connection: connection
+      )
+    end
+
+    def perform_hotel_detail(*args)
+      HotelDetail::Operation.new(*args).perform(
         connection: connection
       )
     end
