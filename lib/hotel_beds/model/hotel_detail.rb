@@ -23,7 +23,7 @@ module HotelBeds
       attribute :destination, HotelBeds::Model::Destination
       attribute :stars, String
       attribute :chain, String
-      arrtibute :product_room, Array[HotelBeds::Model::ProductRoom]
+      attribute :product_room, Array[HotelBeds::Model::ProductRoom]
       # attribute :currency, String
       #
       # def grouped_rooms(requested_rooms)
