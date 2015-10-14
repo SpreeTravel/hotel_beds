@@ -29,6 +29,8 @@ module HotelBeds
       end
 
       def customer(customer)
+        puts 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+        puts customer.inspect
         {
           :@type => (:child == customer.type ? "CH" : "AD"),
           :CustomerId => customer.id,

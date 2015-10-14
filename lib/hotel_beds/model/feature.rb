@@ -7,7 +7,7 @@ module HotelBeds
 
       # attributes
       attribute :code, String
-      attribute :Name, String
+      attribute :name, String
     end
   end
 end
