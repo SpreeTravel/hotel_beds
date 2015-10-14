@@ -25,7 +25,7 @@ module HotelBeds
           }, {
             :@type => "EXT_ORDER",
             :Name => "ORDER_CONTRACT_PRICE",
-            :Value => "ASC"
+            :Value => __getobj__.order
           }]
         } }
       end

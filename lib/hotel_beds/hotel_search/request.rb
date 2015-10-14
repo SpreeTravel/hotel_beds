@@ -9,11 +9,13 @@ module HotelBeds
       attribute :session_id, String, default: SecureRandom.hex[0..15]
       attribute :page_number, Integer, default: 1
       attribute :items_per_page, Integer, default: 50
+      attribute :order, String, default: 'DESC'
       attribute :check_in_date, Date
       attribute :check_out_date, Date
       attribute :destination_code, String
       attribute :hotel_codes, Array[Integer]
       attribute :rooms, Array[HotelBeds::Model::RequestedRoom]
+
 
       # validation
       validates :destination_code, length: { is: 3, allow_blank: false }
