@@ -29,6 +29,7 @@ module HotelBeds
       end
 
       def transfers
+        puts body.inspect
         body.css("ServiceTransfer").lazy.map do |transfer|
           HotelBeds::Parser::Transfer.new(transfer).to_model
         end

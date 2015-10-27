@@ -18,8 +18,10 @@ module HotelBeds
           # :Contract => HotelBeds::Model::Contract, ## Agregar validate del 1 a 10
           # :TicketCode => ticket_code,
           # :ModalityCode => modality_code, ## Agregar validate del 1 al 13
-          :ServiceOccupancy => occupancy
-        }.merge(Hash(destination))
+          :ServiceOccupancy => occupancy,
+          :Destination => destination
+
+        }
       end
 
       private
@@ -57,10 +59,10 @@ module HotelBeds
       end
 
       def destination
-        { Destination: {
+        {
           :@code => String(__getobj__.destination).upcase,
           :@type => "SIMPLE"
-        } }
+        }
       end
 
       def occupancy

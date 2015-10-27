@@ -13,8 +13,29 @@ module HotelBeds
                 :@type => 'IN',
                 :ServiceDate => service_date,
                 :Occupancy => occupancy,
-                }.merge(Hash(pickup_location)).merge(Hash(destination_location))
-        }.merge(Hash(extra_params))
+                :PickupLocation =>  {
+                  '@xsi:type'=>"ProductTransferHotel",
+                  :@code => String(__getobj__.pickup_location).upcase,
+                  :@name => 'JW Marriott Essex House',
+                  :TransferZone => {
+                    '@xsi:type'=>"ProductZone",
+                    :@code => 'MAN',
+                    :@name => 'Manhattan Area Hotels'
+                  }
+                },
+                :DestinationLocation => {
+                  '@xsi:type'=>"ProductTransferTerminal",
+                  :@code => String(__getobj__.destination_location).upcase,
+                  :@terminal_type => 'A',
+                  :@name => 'NEW YORK - KENNEDY',
+                  :TransferZone => {
+                    '@xsi:type'=>"ProductZone",
+                    :@code => 'JFK',
+                    :@name => 'New York, John F. Kennedy International Airport'
+                  }
+                },
+          }
+        }
       end
 
       private
@@ -35,7 +56,7 @@ module HotelBeds
       def service_date
         {
           :@date =>  __getobj__.service_date.first.date.strftime("%Y%m%d") ,
-          :@time =>  __getobj__.service_date.first.time
+          :@time => '1000'
         }
       end
 
@@ -47,11 +68,11 @@ module HotelBeds
         { PickupLocation:  {
             '@xsi:type'=>"ProductTransferHotel",
             :@code => String(__getobj__.pickup_location).upcase,
-            TransferZone: {
-              '@xsi:type'=>"ProductZone",
-              :@code => 'MAN',
-              :@name => 'Can Pastilla'
-            }
+            # TransferZone: {
+            #   '@xsi:type'=>"ProductZone",
+            #   :@code => 'MAN',
+            #   :@name => 'Can Pastilla'
+            # }
           }
         }
 
@@ -61,11 +82,11 @@ module HotelBeds
         { DestinationLocation: {
             '@xsi:type'=>"ProductTransferTerminal",
             :@code => String(__getobj__.destination_location).upcase,
-          TransferZone: {
-            '@xsi:type'=>"ProductZone",
-            :@code => 'JFK',
-            :@name => 'Palma Majorca, Son Sant Joan Airport'
-            }
+          # TransferZone: {
+          #   '@xsi:type'=>"ProductZone",
+          #   :@code => 'JFK',
+          #   :@name => 'Palma Majorca, Son Sant Joan Airport'
+          #   }
           }
         }
       end
@@ -73,7 +94,7 @@ module HotelBeds
       def occupancy
         {
           :@adult_count => Integer(__getobj__.occupancy.first.adult_count),
-          :@child_count => Integer(__getobj__.occupancy.first.child_count)
+          # :@child_count => Integer(__getobj__.occupancy.first.child_count)
         }
       end
 
