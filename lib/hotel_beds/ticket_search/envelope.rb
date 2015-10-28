@@ -13,30 +13,18 @@ module HotelBeds
           :Language => language,
           :DateFrom => date_from,
           :DateTo => date_to,
-          # :Classification => classification,
-          # :TicketZone => ticket_zone,
-          # :Contract => HotelBeds::Model::Contract, ## Agregar validate del 1 a 10
-          # :TicketCode => ticket_code,
-          # :ModalityCode => modality_code, ## Agregar validate del 1 al 13
           :ServiceOccupancy => occupancy,
           :Destination => destination
-
-        }
+        }.merge(Hash(extra_params))
       end
 
       private
+
       def extra_params
         { ExtraParamList: {
-          ExtendedData: [{
-            :@type => "EXT_ADDITIONAL_PARAM",
-            :Name => "PARAM_KEY_PRICE_BREAKDOWN",
-            :Value => "Y"
-          }, {
-            :@type => "EXT_ORDER",
-            :Name => "ORDER_CONTRACT_PRICE",
-            :Value => "ASC"
-          }]
-        } }
+          ExtendedData: []
+          }
+        }
       end
 
       def pagination_data
@@ -60,15 +48,18 @@ module HotelBeds
 
       def destination
         {
-          :@code => String(__getobj__.destination).upcase,
+          # :@code => String(__getobj__.destination).upcase,
+          :@code => "PMI",
           :@type => "SIMPLE"
         }
       end
 
       def occupancy
         {
-          :@adult_count => Integer(__getobj__.service_occupancy.first.adult_count),
-          :@child_count => Integer(__getobj__.service_occupancy.first.child_count)
+          # :@adult_count => Integer(__getobj__.service_occupancy.first.adult_count),
+          :@adult_count => 1,
+          # :@child_count => Integer(__getobj__.service_occupancy.first.child_count)
+          :@child_count => 0
         }
       end
 

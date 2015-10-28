@@ -10,35 +10,27 @@ module HotelBeds
           :Language => language,
           :ReturnContents => return_contents,
           AvailData: {
-                :@type => 'IN',
-                :ServiceDate => service_date,
-                :Occupancy => occupancy,
-                :PickupLocation =>  {
-                  '@xsi:type'=>"ProductTransferHotel",
-                  :@code => String(__getobj__.pickup_location).upcase,
-                  :@name => 'JW Marriott Essex House',
-                  :TransferZone => {
-                    '@xsi:type'=>"ProductZone",
-                    :@code => 'MAN',
-                    :@name => 'Manhattan Area Hotels'
-                  }
-                },
-                :DestinationLocation => {
-                  '@xsi:type'=>"ProductTransferTerminal",
-                  :@code => String(__getobj__.destination_location).upcase,
-                  :@terminal_type => 'A',
-                  :@name => 'NEW YORK - KENNEDY',
-                  :TransferZone => {
-                    '@xsi:type'=>"ProductZone",
-                    :@code => 'JFK',
-                    :@name => 'New York, John F. Kennedy International Airport'
-                  }
-                },
+            :@type => 'IN',
+            :ServiceDate => service_date,
+            :Occupancy => occupancy,
+            :PickupLocation =>  {
+              '@xsi:type'=>"ProductTransferTerminal",
+              :@code => 'JFK',
+              :DateTime => {
+                :@date => '20151226',
+                :@time => '1100'
+              }
+            },
+            :DestinationLocation => {
+              '@xsi:type'=>"ProductTransferHotel",
+              :@code => 13388,
+
+            },
           }
         }
       end
 
-      private
+        private
       def extra_params
         { ExtraParamList: {
           ExtendedData: [{
@@ -55,7 +47,7 @@ module HotelBeds
 
       def service_date
         {
-          :@date =>  __getobj__.service_date.first.date.strftime("%Y%m%d") ,
+          :@date =>  '20151226' ,
           :@time => '1000'
         }
       end
@@ -95,6 +87,11 @@ module HotelBeds
         {
           :@adult_count => Integer(__getobj__.occupancy.first.adult_count),
           # :@child_count => Integer(__getobj__.occupancy.first.child_count)
+          GuestList: {
+            Customer: {
+              :@type => 'AD'
+            }
+          }
         }
       end
 
