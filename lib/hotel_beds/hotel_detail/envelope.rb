@@ -8,6 +8,7 @@ module HotelBeds
         {
           # :@sessionId => session_id,
           :Language => language,
+          :@version => "2013/12",
           :HotelCode  => code
         }.merge(Hash(extra_params))
       end

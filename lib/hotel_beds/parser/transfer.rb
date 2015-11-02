@@ -16,17 +16,17 @@ module HotelBeds
       attribute :currency, attr: "Currency"
       attribute :total_amount, attr: "TotalAmount"
       attribute :net_price, attr: "NetPrice"
-      attribute :descriptions, selector: "TransferInfo > DescriptionList > Description",
-        multiple: true
+      # attribute :description, selector: "TransferInfo > DescriptionList > Description",
+      #   multiple: true
       attribute :images, selector: "TransferInfo > ImageList > Image > Url",
         multiple: true
       attribute :type, attr: "TransferInfo > Type"
       attribute :vehicle_type, attr: "TransferInfo > VehicleType"
-      attribute :maximum_waiting_time, attr: "TransferInfo > TransferSpecificContent > MaximumWaitingTime"
-      attribute :contract, selector: "ContractList > Contract",
-                parser: HotelBeds::Parser::Contract
-      attribute :transferbullet_point, selector: "TransferInfo > TransferSpecificContent > GenericTransferGuidelinesList > TransferBulletPoint",
-                parser: HotelBeds::Parser::TransferBulletPoint
+      # attribute :maximum_waiting_time, attr: "TransferInfo > TransferSpecificContent > MaximumWaitingTime"
+      # attribute :contract, selector: "ContractList > Contract",
+      #           parser: HotelBeds::Parser::Contract
+      # attribute :transferbullet_point, selector: "TransferInfo > TransferSpecificContent > GenericTransferGuidelinesList > TransferBulletPoint",
+      #           parser: HotelBeds::Parser::TransferBulletPoint
 
     end
   end

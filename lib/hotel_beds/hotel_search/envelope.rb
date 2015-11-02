@@ -7,6 +7,7 @@ module HotelBeds
       def attributes
         {
           :@sessionId => session_id,
+          :@version => "2013/12",
           :PaginationData => pagination_data,
           :Language => language,
           :CheckInDate => check_in_date,

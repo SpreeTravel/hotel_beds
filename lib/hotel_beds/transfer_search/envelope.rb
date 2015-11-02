@@ -7,48 +7,25 @@ module HotelBeds
       def attributes
         {
           :@sessionId => session_id,
+          :@version => "2013/12",
           :Language => language,
           :ReturnContents => return_contents,
-          AvailData: {
+          :AvailData => {
             :@type => 'IN',
             :ServiceDate => service_date,
             :Occupancy => occupancy,
-            :PickupLocation =>  {
-              '@xsi:type'=>"ProductTransferTerminal",
-              :@code => 'JFK',
-              :DateTime => {
-                :@date => '20151226',
-                :@time => '1100'
-              }
-            },
-            :DestinationLocation => {
-              '@xsi:type'=>"ProductTransferHotel",
-              :@code => 13388,
-
-            },
+            :PickupLocation =>  pickup_location,
+            :DestinationLocation => destination_location
           }
         }
       end
 
-        private
-      def extra_params
-        { ExtraParamList: {
-          ExtendedData: [{
-           :@type => "EXT_ADDITIONAL_PARAM",
-           :Name => "PARAM_KEY_PRICE_BREAKDOWN",
-           :Value => "Y"
-        }, {
-           :@type => "EXT_ORDER",
-           :Name => "ORDER_CONTRACT_PRICE",
-           :Value => "ASC"
-        }]
-      } }
-    end
+      private
 
       def service_date
         {
-          :@date =>  '20151226' ,
-          :@time => '1000'
+          :@date =>  Integer(__getobj__.service_date.first.date.strftime("%Y%m%d")) ,
+          :@time => '1100'
         }
       end
 
@@ -57,41 +34,34 @@ module HotelBeds
       end
 
       def pickup_location
-        { PickupLocation:  {
-            '@xsi:type'=>"ProductTransferHotel",
-            :@code => String(__getobj__.pickup_location).upcase,
-            # TransferZone: {
-            #   '@xsi:type'=>"ProductZone",
-            #   :@code => 'MAN',
-            #   :@name => 'Can Pastilla'
-            # }
+        {
+          '@xsi:type'=>"ProductTransferTerminal",
+          :Code => String(__getobj__.pickup_location).upcase,
+          :DateTime => {
+            :@date => Integer(__getobj__.service_date.first.date.strftime("%Y%m%d")) ,
+            :@time => '1100'
           }
         }
 
       end
 
       def destination_location
-        { DestinationLocation: {
-            '@xsi:type'=>"ProductTransferTerminal",
-            :@code => String(__getobj__.destination_location).upcase,
-          # TransferZone: {
-          #   '@xsi:type'=>"ProductZone",
-          #   :@code => 'JFK',
-          #   :@name => 'Palma Majorca, Son Sant Joan Airport'
-          #   }
-          }
+        {
+          '@xsi:type'=>"ProductTransferHotel",
+          :Code => Integer(__getobj__.destination_location)
         }
       end
 
       def occupancy
+        # TODO Add Gest list for child ages
+        # <GuestList>
+        #   <Customer type="CH">
+        #     <Age>6</Age>
+        #   </Customer>
+        # </GuestList>
         {
-          :@adult_count => Integer(__getobj__.occupancy.first.adult_count),
-          # :@child_count => Integer(__getobj__.occupancy.first.child_count)
-          GuestList: {
-            Customer: {
-              :@type => 'AD'
-            }
-          }
+          :AdultCount => Integer(__getobj__.occupancy.first.adult_count),
+          :ChildCount => Integer(__getobj__.occupancy.first.child_count)
         }
       end
 
