@@ -18,15 +18,8 @@ module HotelBeds
       attribute :service_occupancy, Array[HotelBeds::Model::Occupancy]
 
 
-      # attribute :classification, String
-      # attribute :ticket_zone, String
-      # attribute :contract, HotelBeds::Model::Contract
-      # attribute :ticket_zone, String
-      # attribute :modality_code, Integer, default: 1
-      # attribute :occupancy_list, String
-
       # validation
-      validates :session_id, :date_from, :date_from, :destination, presence: true
+      validates :session_id, :date_from, :date_to, :destination, :service_occupancy, presence: true
       validates :page_number, numericality: {
         greater_than: 0, only_integer: true
       }

@@ -9,6 +9,7 @@ module HotelBeds
       attribute :from, selector: "DateTimeFrom", attr: "date"
       attribute :to, selector: "DateTimeTo", attr: "date"
       attribute :amount, selector: "Amount"
+      attribute :description, selector: "Description"
     end
   end
 end

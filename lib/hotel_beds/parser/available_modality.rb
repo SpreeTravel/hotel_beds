@@ -9,7 +9,7 @@ module HotelBeds
 
       # attributes
       attribute :code, attr: "code"
-      attribute :name, attr: "Name"
+      attribute :name, selector: "Name"
       attribute :type, attr: "Type"
       attribute :mode, attr: "Mode"
       attribute :adult_count, selector: "HotelOccupancy AdultCount"

@@ -1,7 +1,4 @@
 require "hotel_beds/action/envelope"
-require "hotel_beds/builder/hotel_occupancy"
-require "hotel_beds/model/destination"
-require "hotel_beds/model/contract"
 
 module HotelBeds
   module TicketSearch
@@ -9,23 +6,17 @@ module HotelBeds
       def attributes
         {
           :@sessionId => session_id,
-          :PaginationData => pagination_data,
+          :@version => "2013/12",
           :Language => language,
+          :PaginationData => pagination_data,
+          :ServiceOccupancy => occupancy,
+          :Destination => destination,
           :DateFrom => date_from,
           :DateTo => date_to,
-          :ServiceOccupancy => occupancy,
-          :Destination => destination
-        }.merge(Hash(extra_params))
+        }
       end
 
       private
-
-      def extra_params
-        { ExtraParamList: {
-          ExtendedData: []
-          }
-        }
-      end
 
       def pagination_data
         {
@@ -48,18 +39,21 @@ module HotelBeds
 
       def destination
         {
-          # :@code => String(__getobj__.destination).upcase,
-          :@code => "PMI",
+          :@code => String(__getobj__.destination).upcase,
           :@type => "SIMPLE"
         }
       end
 
       def occupancy
+        # TODO Add Gest list for child ages
+        # <GuestList>
+        #   <Customer type="CH">
+        #     <Age>6</Age>
+        #   </Customer>
+        # </GuestList>
         {
-          # :@adult_count => Integer(__getobj__.service_occupancy.first.adult_count),
-          :@adult_count => 1,
-          # :@child_count => Integer(__getobj__.service_occupancy.first.child_count)
-          :@child_count => 0
+          :AdultCount => Integer(__getobj__.service_occupancy.first.adult_count),
+          :ChildCount => Integer(__getobj__.service_occupancy.first.child_count)
         }
       end
 
