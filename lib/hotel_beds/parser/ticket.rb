@@ -1,5 +1,5 @@
 require "hotel_beds/parser"
-require "hotel_beds/parser/contract"
+# require "hotel_beds/parser/contract"
 require "hotel_beds/parser/destination"
 require "hotel_beds/parser/available_modality"
 
@@ -20,8 +20,8 @@ module HotelBeds
       attribute :ticket_class, selector: "TicketInfo > TicketClass"
       attribute :destination, selector: "TicketInfo > Destination",
         parser: HotelBeds::Parser::Destination
-      attribute :available_modality, selector: "AvailableModality", multiple: true,
-        parser: HotelBeds::Parser::AvailableModality
+      # attribute :available_modality, selector: "AvailableModality", multiple: true,
+      #   parser: HotelBeds::Parser::AvailableModality
     end
   end
 end

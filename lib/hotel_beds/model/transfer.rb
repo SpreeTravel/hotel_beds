@@ -15,9 +15,12 @@ module HotelBeds
       attribute :net_price, BigDecimal
       attribute :description, String
       attribute :images, Array[String]
+      attribute :product_specification, Array[String]
       attribute :ticket_zone, String
       attribute :type, String
       attribute :vehicle_type, String
+      attribute :product_type, String
+      attribute :service_type, String
       attribute :contract, HotelBeds::Model::Contract
       attribute :transferbullet_point, Array[HotelBeds::Model::TransferBulletPoint]
 

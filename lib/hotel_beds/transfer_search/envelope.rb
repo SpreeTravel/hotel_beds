@@ -5,6 +5,7 @@ module HotelBeds
   module TransferSearch
     class Envelope < HotelBeds::Action::Envelope
       def attributes
+        puts __getobj__.inspect
         {
           :@sessionId => session_id,
           :@version => "2013/12",
@@ -34,6 +35,7 @@ module HotelBeds
       end
 
       def pickup_location
+        puts String(__getobj__.pickup_location).upcase
         {
           '@xsi:type'=>"ProductTransferTerminal",
           :Code => String(__getobj__.pickup_location).upcase,
@@ -46,6 +48,7 @@ module HotelBeds
       end
 
       def destination_location
+        puts Integer(__getobj__.destination_location)
         {
           '@xsi:type'=>"ProductTransferHotel",
           :Code => Integer(__getobj__.destination_location)
@@ -53,6 +56,7 @@ module HotelBeds
       end
 
       def occupancy
+        puts __getobj__.occupancy.inspect
         # TODO Add Gest list for child ages
         # <GuestList>
         #   <Customer type="CH">

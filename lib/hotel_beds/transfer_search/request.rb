@@ -15,8 +15,9 @@ module HotelBeds
       # attribute :page_number, Integer, default: 1
       # attribute :items_per_page, Integer, default: 50
       attribute :service_date, Array[HotelBeds::Model::ServiceDate]
-      attribute :destination_location, String
       attribute :pickup_location, String
+      attribute :destination_location, Integer
+
       attribute :occupancy, Array[HotelBeds::Model::Occupancy]
       attribute :return_contents, String
 

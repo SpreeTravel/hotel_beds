@@ -17,12 +17,15 @@ module HotelBeds
       attribute :ticket_zone, String
       attribute :company_code, String
       attribute :ticket_class, String
-      attribute :available_modality, Array[HotelBeds::Model::AvailableModality]
+      # attribute :available_modality, Array[HotelBeds::Model::AvailableModality]
       attribute :destination, HotelBeds::Model::Destination
 
-      def grouped_rooms(requested_modalities)
-        HotelBeds::Parser::ModalityGrouper.new(requested_modalities, available_modalities).groups
-      end
+
+
+
+      # def grouped_rooms(requested_modalities)
+      #   HotelBeds::Parser::ModalityGrouper.new(requested_modalities, available_modalities).groups
+      # end
     end
   end
 end
