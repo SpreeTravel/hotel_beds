@@ -9,10 +9,8 @@ module HotelBeds
       attribute :session_id, String, default: SecureRandom.hex[0..15]
       attribute :code, Integer
 
-
       # validation
       validates :session_id, :code, presence: true
-
     end
   end
 end

@@ -20,6 +20,10 @@ module HotelBeds
       attribute :ticket_class, selector: "TicketInfo > TicketClass"
       attribute :destination, selector: "TicketInfo > Destination",
         parser: HotelBeds::Parser::Destination
+      attribute :contract_name, selector: "AvailableModality > Contract > Name"
+      attribute :contract_code, selector: "AvailableModality > Contract > IncomingOffice", attr: "code"
+
+
       # attribute :available_modality, selector: "AvailableModality", multiple: true,
       #   parser: HotelBeds::Parser::AvailableModality
     end

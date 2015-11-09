@@ -1,5 +1,4 @@
 require "hotel_beds/action/envelope"
-require "hotel_beds/builder/hotel_occupancy"
 
 module HotelBeds
   module HotelDetail

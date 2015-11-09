@@ -4,6 +4,7 @@ require "hotel_beds/hotel_search/operation"
 require "hotel_beds/hotel_detail/operation"
 require "hotel_beds/transfer_search/operation"
 require "hotel_beds/ticket_search/operation"
+require "hotel_beds/ticket_detail/operation"
 require "hotel_beds/hotel_basket_add/operation"
 require "hotel_beds/purchase_confirm/operation"
 require "hotel_beds/purchase_cancel/operation"
@@ -38,6 +39,12 @@ module HotelBeds
 
     def perform_ticket_search(*args)
       TicketSearch::Operation.new(*args).perform(
+        connection: connection
+      )
+    end
+
+    def perform_ticket_detail(*args)
+      TicketDetail::Operation.new(*args).perform(
         connection: connection
       )
     end
