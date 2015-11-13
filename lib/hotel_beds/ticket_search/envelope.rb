@@ -7,12 +7,12 @@ module HotelBeds
         {
           :@sessionId => session_id,
           :@version => "2013/12",
-          :Language => language,
-          :PaginationData => pagination_data,
-          :ServiceOccupancy => occupancy,
-          :Destination => destination,
-          :DateFrom => date_from,
-          :DateTo => date_to,
+          Language: language,
+          PaginationData: pagination_data,
+          ServiceOccupancy: occupancy,
+          Destination: destination,
+          DateFrom: date_from,
+          DateTo: date_to,
         }
       end
 
@@ -44,17 +44,28 @@ module HotelBeds
         }
       end
 
+      def child_count
+        __getobj__.service_occupancy.first.child_count
+      end
+
+      def child_ages
+        __getobj__.service_occupancy.first.child_ages
+      end
+
+
       def occupancy
-        # TODO Add Gest list for child ages
-        # <GuestList>
-        #   <Customer type="CH">
-        #     <Age>6</Age>
-        #   </Customer>
-        # </GuestList>
         {
-          :AdultCount => Integer(__getobj__.service_occupancy.first.adult_count),
-          :ChildCount => Integer(__getobj__.service_occupancy.first.child_count)
-        }
+          AdultCount: Integer(__getobj__.service_occupancy.first.adult_count),
+          ChildCount: Integer(child_count),
+          GuestList: 1.upto(child_count).map { |i|
+              {
+                Customer: {
+                  :@type => "CH",
+                  :Age => Integer(child_ages.fetch(i - 1))
+                }
+              }
+            }
+          }
       end
 
     end

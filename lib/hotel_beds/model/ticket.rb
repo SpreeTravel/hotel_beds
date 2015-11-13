@@ -9,25 +9,28 @@ module HotelBeds
       include HotelBeds::Model
 
       # attributes
-      attribute :code, String
       attribute :availability_token, String
+
+      attribute :date_from, String
+      attribute :date_to, String
+      attribute :currency, String
+      attribute :currency_code, String
+
+      attribute :code, String
       attribute :name, String
       attribute :description, String
       attribute :images, Array[String]
-      attribute :ticket_zone, String
       attribute :company_code, String
       attribute :ticket_class, String
-      attribute :contract_name, String
-      attribute :contract_code, Integer
-      # attribute :available_modality, Array[HotelBeds::Model::AvailableModality]
       attribute :destination, HotelBeds::Model::Destination
 
+      attribute :zone, String
 
+      attribute :available_modality, Array[HotelBeds::Model::AvailableModality]
 
+      attribute :adult_count, Integer
+      attribute :child_count, Integer
 
-      # def grouped_rooms(requested_modalities)
-      #   HotelBeds::Parser::ModalityGrouper.new(requested_modalities, available_modalities).groups
-      # end
     end
   end
 end

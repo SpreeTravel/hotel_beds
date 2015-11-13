@@ -25,6 +25,7 @@ module HotelBeds
     # each method returns an operation object which contains both the
     # request and response objects.
 
+    # HOTEL ####################################
     def perform_hotel_search(*args)
       HotelSearch::Operation.new(*args).perform(
         connection: connection
@@ -37,6 +38,14 @@ module HotelBeds
       )
     end
 
+    def add_hotel_room_to_basket(*args)
+      HotelBasketAdd::Operation.new(*args).perform(
+        connection: connection
+      )
+    end
+    # HOTEL ####################################
+
+    # TICKET ###################################
     def perform_ticket_search(*args)
       TicketSearch::Operation.new(*args).perform(
         connection: connection
@@ -49,6 +58,14 @@ module HotelBeds
       )
     end
 
+    def add_ticket_to_basket(*args)
+      TicketBasketAdd::Operation.new(*args).perform(
+        connection: connection
+      )
+    end
+    # TICKET #####################################
+
+    # TRANSFER ###################################
     def perform_transfer_search(*args)
       TransferSearch::Operation.new(*args).perform(
           connection: connection
@@ -56,10 +73,11 @@ module HotelBeds
     end
 
     def add_hotel_room_to_basket(*args)
-      HotelBasketAdd::Operation.new(*args).perform(
+      TicketBasketAdd::Operation.new(*args).perform(
         connection: connection
       )
     end
+    # TRANSFER ######################################
 
     def confirm_purchase(*args)
       PurchaseConfirm::Operation.new(*args).perform(
