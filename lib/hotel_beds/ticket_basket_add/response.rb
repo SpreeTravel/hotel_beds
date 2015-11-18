@@ -1,5 +1,5 @@
 require "hotel_beds/action/response"
-require "hotel_beds/parser/purchase"
+require "hotel_beds/parser/ticket_purchase"
 
 module HotelBeds
   module TicketBasketAdd
@@ -9,7 +9,7 @@ module HotelBeds
       end
 
       def purchase
-        HotelBeds::Parser::Purchase.new(body.at_css("Purchase")).to_model
+        HotelBeds::Parser::TicketPurchase.new(body.at_css("Purchase")).to_model
       end
     end
   end

@@ -52,11 +52,11 @@ module HotelBeds
 
       def ticket_info
         {
-          :"xsi:type" => "ProductTicket",
-          Code: service.code,
+          :"@xsi:type" => "ProductTicket",
+          Code: service.ticket_code,
           Destination: {
             :@code => service.destination.code,
-            :@type => service.destination.type,
+            :@type => service.destination.type
           }
         }
       end
@@ -74,13 +74,13 @@ module HotelBeds
 
       def paxes
         {
-          AdultCount: service.adult_count,
-          ChildCount: service.child_count,
-          GuestList: 1.upto(child_count).map { |i|
+          AdultCount: service.occupancy.adult_count,
+          ChildCount: service.occupancy.child_count,
+          GuestList: 1.upto(service.occupancy.child_count).map { |i|
             {
               Customer: {
                 :@type => "CH",
-                :Age => Integer(child_ages.fetch(i - 1))
+                :Age => Integer(service.occupancy.child_ages.fetch(i - 1))
               }
             }
           }

@@ -2,6 +2,7 @@ require "securerandom"
 require "hotel_beds/action/request"
 require "hotel_beds/model"
 require "hotel_beds/model/destination"
+require "hotel_beds/model/occupancy"
 
 
 module HotelBeds
@@ -11,18 +12,17 @@ module HotelBeds
         include HotelBeds::Model
 
         # attributes
-        attribute :token, String
-        attribute :code, String
+        attribute :avail_token, String
         attribute :contract_name, String
         attribute :contract_incoming_office_code, String
         attribute :date_from, Date
         attribute :date_to, Date
-        attribute :available_modality, String
+        attribute :ticket_code, String
         attribute :currency, String
-        attribute :destination, HotelBeds::Model::Destination
-        attribute :adult_count, String
-        attribute :child_count, String
 
+        attribute :available_modality, String
+        attribute :destination, HotelBeds::Model::Destination
+        attribute :occupancy, HotelBeds::Model::Occupancy
 
         # validation
         # validates :destination_code, length: { is: 3, allow_blank: false }

@@ -18,8 +18,11 @@ module HotelBeds
       attribute :pickup_location, String
       attribute :destination_location, Integer
 
-      attribute :occupancy, Array[HotelBeds::Model::Occupancy]
+      attribute :occupancy, HotelBeds::Model::Occupancy
       attribute :return_contents, String
+      attribute :avail_data_type, Array[String]
+
+
 
       # validation
       # validates :pickup_location, length: { is: 3, allow_blank: false }

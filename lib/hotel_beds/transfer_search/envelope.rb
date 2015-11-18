@@ -5,27 +5,20 @@ module HotelBeds
   module TransferSearch
     class Envelope < HotelBeds::Action::Envelope
       def attributes
-        puts __getobj__.inspect
+        puts avail_data.inspect
         {
           :@sessionId => session_id,
           :@version => "2013/12",
           :Language => language,
           :ReturnContents => return_contents,
-          :AvailData => {
-            :@type => 'IN',
-            :ServiceDate => service_date,
-            :Occupancy => occupancy,
-            :PickupLocation =>  pickup_location,
-            :DestinationLocation => destination_location
-          }
-        }
+        }.merge(Hash(avail_data))
       end
 
       private
 
-      def service_date
+      def service_date(date)
         {
-          :@date =>  Integer(__getobj__.service_date.first.date.strftime("%Y%m%d")) ,
+          :@date =>  Integer(date.strftime("%Y%m%d")) ,
           :@time => '1100'
         }
       end
@@ -34,44 +27,89 @@ module HotelBeds
         String(__getobj__.language).upcase
       end
 
-      def pickup_location
-        puts String(__getobj__.pickup_location).upcase
-        {
-          '@xsi:type'=>"ProductTransferTerminal",
-          :Code => String(__getobj__.pickup_location).upcase,
-          :DateTime => {
-            :@date => Integer(__getobj__.service_date.first.date.strftime("%Y%m%d")) ,
-            :@time => '1100'
-          }
-        }
-
+      def child_count
+        __getobj__.occupancy.first.child_count
       end
 
-      def destination_location
-        puts Integer(__getobj__.destination_location)
-        {
-          '@xsi:type'=>"ProductTransferHotel",
-          :Code => Integer(__getobj__.destination_location)
-        }
+      def child_ages
+        __getobj__.occupancy.first.child_ages
       end
 
       def occupancy
-        puts __getobj__.occupancy.inspect
-        # TODO Add Gest list for child ages
-        # <GuestList>
-        #   <Customer type="CH">
-        #     <Age>6</Age>
-        #   </Customer>
-        # </GuestList>
         {
           :AdultCount => Integer(__getobj__.occupancy.first.adult_count),
-          :ChildCount => Integer(__getobj__.occupancy.first.child_count)
+          :ChildCount => Integer(child_count),
+          GuestList: 1.upto(child_count).map { |i|
+          {
+            Customer: {
+              :@type => "CH",
+              :Age => Integer(child_ages.fetch(i - 1))
+            }
+          }
+        }
         }
       end
 
       def return_contents
         String(__getobj__.return_contents).upcase
       end
+
+      def avail_data
+        if __getobj__.avail_data_type.size == 2
+          {
+            AvailData: [
+              {
+                :@type => __getobj__.avail_data_type.first,
+                ServiceDate: service_date(__getobj__.service_date.first.date ),
+                Occupancy: occupancy,
+                PickupLocation: {
+                   '@xsi:type'=> 'ProductTransferTerminal',
+                   Code: __getobj__.pickup_location,
+                   DateTime: service_date(__getobj__.service_date.first.date )
+                },
+                DestinationLocation: {
+                 '@xsi:type'=>'ProductTransferHotel',
+                 Code: __getobj__.destination_location,
+                }
+              },
+              {
+                :@type => __getobj__.avail_data_type.last,
+                ServiceDate: service_date(__getobj__.service_date.last.date),
+                Occupancy: occupancy,
+                PickupLocation: {
+                 '@xsi:type'=>'ProductTransferHotel',
+                 Code: __getobj__.destination_location,
+                },
+                DestinationLocation: {
+                 '@xsi:type'=> 'ProductTransferTerminal',
+                 Code: __getobj__.pickup_location,
+                 DateTime: service_date(__getobj__.service_date.last.date )
+                }
+              }
+            ]
+          }
+        else
+          {
+            AvailData: {
+              :@type => __getobj__.avail_data_type.first,
+              ServiceDate: service_date(__getobj__.service_date.first.date ),
+              Occupancy: occupancy,
+              PickupLocation: {
+                '@xsi:type'=> 'ProductTransferTerminal',
+                Code: __getobj__.pickup_location,
+                DateTime: service_date(__getobj__.service_date.first.date )
+              },
+              DestinationLocation: {
+                '@xsi:type'=>'ProductTransferHotel',
+                Code: __getobj__.destination_location,
+              }
+            }
+          }
+        end
+
+      end
+
+
     end
   end
 end

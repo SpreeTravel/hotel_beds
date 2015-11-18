@@ -1,6 +1,7 @@
 require "hotel_beds/model"
 require "hotel_beds/model/price"
 require "hotel_beds/model/contract"
+require "hotel_beds/model/operation_date"
 
 
 module HotelBeds
@@ -19,6 +20,7 @@ module HotelBeds
       attribute :prices, Array[HotelBeds::Model::Price],
                 default: Array.new
       attribute :contract, HotelBeds::Model::Contract
+      attribute :operation_dates, Array[HotelBeds::Model::OperationDate]
 
       validates :child_ages, numericality: {
                                 greater_than_or_equal_to: 4,

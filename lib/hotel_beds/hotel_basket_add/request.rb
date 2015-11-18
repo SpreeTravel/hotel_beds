@@ -10,12 +10,14 @@ module HotelBeds
         include HotelBeds::Model
 
         # attributes
-        attribute :availability_token, String
+        attribute :avail_token, String
         attribute :contract_name, String
         attribute :contract_incoming_office_code, String
-        attribute :check_in_date, Date
-        attribute :check_out_date, Date
+        attribute :date_from, Date
+        attribute :date_to, Date
         attribute :hotel_code, String
+        attribute :currency, String
+
         attribute :destination_code, String
         attribute :rooms, Array[HotelBeds::Model::AvailableRoom]
 

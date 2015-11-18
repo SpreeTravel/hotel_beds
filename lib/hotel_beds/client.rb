@@ -2,10 +2,15 @@ require "hotel_beds/configuration"
 require "hotel_beds/connection"
 require "hotel_beds/hotel_search/operation"
 require "hotel_beds/hotel_detail/operation"
-require "hotel_beds/transfer_search/operation"
+require "hotel_beds/hotel_basket_add/operation"
+
 require "hotel_beds/ticket_search/operation"
 require "hotel_beds/ticket_detail/operation"
-require "hotel_beds/hotel_basket_add/operation"
+require "hotel_beds/ticket_basket_add/operation"
+
+require "hotel_beds/transfer_search/operation"
+require "hotel_beds/transfer_basket_add/operation"
+
 require "hotel_beds/purchase_confirm/operation"
 require "hotel_beds/purchase_cancel/operation"
 require "hotel_beds/purchase_flush/operation"
@@ -72,7 +77,7 @@ module HotelBeds
       )
     end
 
-    def add_hotel_room_to_basket(*args)
+    def add_transfer_to_basket(*args)
       TicketBasketAdd::Operation.new(*args).perform(
         connection: connection
       )
