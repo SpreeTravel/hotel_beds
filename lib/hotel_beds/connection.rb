@@ -24,6 +24,8 @@ module HotelBeds
         }
       }.merge(data) }
       # send the call
+      puts 'el emnsaje completoo///////////////////////////////////////////////////////////////////'
+      puts message.inspect
       response = client.call(method, {
         soap_action: "",
         attributes: {

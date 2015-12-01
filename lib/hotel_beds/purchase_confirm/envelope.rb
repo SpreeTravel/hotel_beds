@@ -21,7 +21,7 @@ module HotelBeds
       def service_data(service)
         {
           :@SPUI => service.id,
-          :"@xsi:type" => "ConfirmationServiceDataHotel",
+          :"@xsi:type" => service.type,
           :CustomerList => {
             :Customer => service.customers.map(&method(:customer))
           }

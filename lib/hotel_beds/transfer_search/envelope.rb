@@ -28,16 +28,16 @@ module HotelBeds
       end
 
       def child_count
-        __getobj__.occupancy.first.child_count
+        __getobj__.occupancy.child_count
       end
 
       def child_ages
-        __getobj__.occupancy.first.child_ages
+        __getobj__.occupancy.child_ages
       end
 
       def occupancy
         {
-          :AdultCount => Integer(__getobj__.occupancy.first.adult_count),
+          :AdultCount => Integer(__getobj__.occupancy.adult_count),
           :ChildCount => Integer(child_count),
           GuestList: 1.upto(child_count).map { |i|
           {
